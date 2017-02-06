@@ -1,6 +1,17 @@
 cman
 ==
 
+`cman` is a PoC config manager thing.
+
+Given a recipe, as per [compiler/fixtures/webserver.yml](compiler/fixtures/webserver.yml), turn into some shell script.
+
+This yml is, actually, any valid [`text/template`](https://golang.org/pkg/text/template/) based file (with the addition of functions from [github.com/moul/funcmap](github.com/moul/funcmap) that compiles into yaml.
+
+This final script will be, should I bother completing the tool, be pushed into some storage to be brought down by an agent on boot of a machine.
+
+It will do idempotence, of course, but the goal has always been to facilitate immutable infrastructure first.
+
+
 | who       | what |
 |-----------|------|
 | dockerhub | https://hub.docker.com/r/jspc/cman/   |
@@ -32,4 +43,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
