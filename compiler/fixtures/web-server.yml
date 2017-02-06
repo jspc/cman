@@ -1,17 +1,26 @@
 {{/* Install nginx, start the service and create a page */}}
 
-{{with $packages := split "nginx,iptables,ip6tables" "," }}
-{{range $pkg := $packages}}
-"install {{$pkg}}":
-        runner: pkg
-        args: "{{$pkg}}"
+"steps":
+  - name: "install an init system"
+    runner: pkg
+    args: openrc
 
-"enable {{$pkg}}":
-        runner: service
-        args: "{{$pkg}}"
+  {{with $packages := split "nginx,iptables,ip6tables" "," }}
+  {{range $pkg := $packages}}
+  - name: "install {{$pkg}}"
+    runner: pkg
+    args: "{{$pkg}}"
 
-"start {{$pkg}}":
-        runner: start-service
-        args: "{{$pkg}}"
-{{end}}
-{{end}}
+  - name: "enable {{$pkg}}"
+    runner: service
+    args:
+      mode: enable
+      service: "{{$pkg}}"
+
+  - name: "start {{$pkg}}"
+    runner: service
+    args:
+      mode: start
+      service: "{{$pkg}}"
+  {{end}}
+  {{end}}
