@@ -1,0 +1,17 @@
+{{/* Install nginx, start the service and create a page */}}
+
+{{with $packages := split "nginx,iptables,ip6tables" "," }}
+{{range $pkg := $packages}}
+"install {{$pkg}}":
+        runner: pkg
+        args: "{{$pkg}}"
+
+"enable {{$pkg}}":
+        runner: service
+        args: "{{$pkg}}"
+
+"start {{$pkg}}":
+        runner: start-service
+        args: "{{$pkg}}"
+{{end}}
+{{end}}
